@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 public class UserService {
 
 
-    private Firestore firestore;
+    private final Firestore firestore;
 
 
     private static final String USERS_COLLECTION = "Users";
