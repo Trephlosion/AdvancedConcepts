@@ -1,9 +1,7 @@
 package edu.famu.cftaskmanager.model;
 
-
 import com.google.cloud.Timestamp;
 import com.google.cloud.firestore.annotation.DocumentId;
-
 import com.google.protobuf.util.Timestamps;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,17 +10,25 @@ import lombok.NoArgsConstructor;
 import javax.annotation.Nullable;
 import java.text.ParseException;
 import java.util.ArrayList;
-
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 
-public class Users extends AUsers {
+public abstract class AUsers {
+
     @DocumentId
+    private @Nullable String userId;
+    private String displayName;
+    private String email;
+    private Timestamp createdAt;
 
-    private @Nullable ArrayList<Tasks> tasks;
 
-    public Users(@Nullable String userId, String displayName, String email, Timestamp createdAt, @Nullable ArrayList<Tasks> tasks) {
-        super(userId, displayName, email, createdAt);
-        this.tasks = tasks;
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) throws ParseException {
+        this.createdAt = Timestamp.fromProto(Timestamps.parse(createdAt));
     }
 }
