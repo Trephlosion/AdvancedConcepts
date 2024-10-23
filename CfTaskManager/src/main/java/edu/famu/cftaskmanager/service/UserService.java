@@ -92,8 +92,10 @@ public class UserService {
         return users.get(0);
     }
 
-    public String createUser(RestUsers user) {
-
+    public String createUser(RestUsers user) throws ExecutionException, InterruptedException {
+        ApiFuture<DocumentReference> writeResult = firestore.collection(USERS_COLLECTION).add(user);
+        DocumentReference rs = writeResult.get();
+        return rs.getId();
     }
 
 
